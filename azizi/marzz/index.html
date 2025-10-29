@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JKT48 - Grup Idola Indonesia (Diperbaiki)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #e4007f;
+            --secondary: #f8b500;
+            --dark: #333;
+            --light: #f8f8f8;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), #b3005e);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover {
+            color: var(--secondary);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            /* Mengganti gambar latar belakang dengan URL publik */
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid var(--primary);
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--primary);
+        }
+
+        /* About Section */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Members Section */
+        .members {
+            background-color: #f0f0f0;
+        }
+
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .member-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .member-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .member-img {
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .member-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .member-card:hover .member-img img {
+            transform: scale(1.1);
+        }
+
+        .member-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .member-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .member-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Events Section */
+        .events-timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .events-timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background-color: var(--primary);
+            transform: translateX(-50%);
+        }
+
+        .event-item {
+            margin-bottom: 3rem;
+            position: relative;
+            width: 50%;
+            padding: 0 40px;
+        }
+
+        .event-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .event-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .event-content {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .event-content::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            transform: rotate(45deg);
+        }
+
+        .event-item:nth-child(odd) .event-content::after {
+            right: -10px;
+        }
+
+        .event-item:nth-child(even) .event-content::after {
+            left: -10px;
+        }
+
+        .event-date {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .event-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .footer-column p, .footer-column a {
+            color: #ccc;
+            margin-bottom: 0.8rem;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        /* Media Queries */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            /* Perbaikan Garis Timeline untuk Mobile */
+            .events-timeline::before {
+                left: 30px; 
+            }
+            
+            .event-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 0;
+                left: 0; /* Semua item kembali ke sisi kiri */
+            }
+            
+            /* Menghilangkan left: 50% untuk item genap di mobile */
+            .event-item:nth-child(even) {
+                left: 0;
+            }
+            
+            /* Perbaikan Panah untuk Mobile */
+            .event-item .event-content::after {
+                /* Panah untuk SEMUA event-item (ganjil/genap) harus menunjuk ke garis vertikal di 30px */
+                left: -10px !important; /* Pindahkan panah ke kiri */
+                right: auto !important; /* Batalkan posisi kanan untuk item ganjil */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0.5rem;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .mobile-menu {
+                display: block;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+            
+            nav {
+                width: 100%;
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                margin-top: 1rem;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            
+            .hero {
+                padding: 3rem 0;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .section {
+                padding: 3rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/87/JKT48_logo.svg/100px-JKT48_logo.svg.png" alt="JKT48 Logo">
+                    <h1>JKT48</h1>
+                </div>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Beranda</a></li>
+                        <li><a href="#about">Tentang</a></li>
+                        <li><a href="#members">Anggota</a></li>
+                        <li><a href="#events">Acara</a></li>
+                        <li><a href="#contact">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>JKT48 - Grup Idola Indonesia</h2>
+            <p>Grup idola asli Indonesia yang mengusung konsep "Idol You Can Meet". Bergabunglah dengan kami dalam perjalanan musik dan hiburan yang penuh warna!</p>
+            <a href="#about" class="btn">Pelajari Lebih Lanjut</a>
+        </div>
+    </section>
+
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tentang JKT48</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Grup Idola Pertama di Indonesia</h3>
+                    <p>JKT48 adalah grup idola asal Indonesia dan sister group dari AKB48 yang pertama di luar Jepang. Grup ini dibentuk pada tahun 2011 dan melakukan debut pada tahun 2012.</p>
+                    <p>Konsep JKT48 adalah "Idol You Can Meet" yang memungkinkan penggemar untuk bertemu dengan anggota secara rutin melalui berbagai acara seperti handshake event, theater performance, dan berbagai kegiatan lainnya.</p>
+                    <p>JKT48 telah merilis banyak lagu hits seperti "Heavy Rotation", "Fortune Cookie in Love", "Flying High", dan masih banyak lagi. Grup ini juga aktif dalam berbagai kegiatan amal dan sosial.</p>
+                    <a href="#" class="btn">Baca Selengkapnya</a>
+                </div>
+                <div class="about-image">
+                    <img src="JKT48.jpg" alt="JKT48 Performance">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section members" id="members">
+        <div class="container">
+            <div class="section-title">
+                <h2>Anggota Terpopuler</h2>
+            </div>
+            <div class="members-grid">
+                <div class="member-card">
+                    <div class="member-img">
+                        <img src="Shani Indira.jpg" alt="Shani Indira">
+                    </div>
+                    <div class="member-info">
+                        <h3>Shani Indira Natio</h3>
+                        <p>Generasi 3 - Captain</p>
+                    </div>
+                </div>
+                
+                <div class="member-card">
+                    <div class="member-img">
+                        <img src="Azizi shafa asadel.jpg" alt="Azizi Shafa Asadel">
+                    </div>
+                    <div class="member-info">
+                        <h3>Azizi Shafa Asadel</h3>
+                        <p>Generasi 7 - Center</p>
+                    </div>
+                </div>
+                
+                <div class="member-card">
+                    <div class="member-img">
+                        <img src="Kathrine Irene.jpg" alt="Kathrina Irene">
+                    </div>
+                    <div class="member-info">
+                        <h3>Kathrina Irene</h3>
+                        <p>Generasi 9 - Member</p>
+                    </div>
+                </div>
+                
+                <div class="member-card">
+                    <div class="member-img">
+                        <img src="Angelina Christy.jpg" alt="Angelina Christy">
+                    </div>
+                    <div class="member-info">
+                        <h3>Angelina Christy</h3>
+                        <p>Generasi 7 - Center</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="events">
+        <div class="container">
+            <div class="section-title">
+                <h2>Acara Mendatang</h2>
+            </div>
+            <div class="events-timeline">
+                <div class="event-item">
+                    <div class="event-content">
+                        <span class="event-date">15 Oktober 2023</span>
+                        <h3>Handshake Event</h3>
+                        <p>Acara bersalaman dengan anggota JKT48 di JKT48 Theater. Dapatkan tiket melalui pembelian CD single terbaru.</p>
+                    </div>
+                </div>
+                
+                <div class="event-item">
+                    <div class="event-content">
+                        <span class="event-date">28 Oktober 2023</span>
+                        <h3>JKT48 Concert "Beyond The Future"</h3>
+                        <p>Konser besar JKT48 di ICE BSD City. Menampilkan semua anggota dengan setlist terbaik.</p>
+                    </div>
+                </div>
+                
+                <div class="event-item">
+                    <div class="event-content">
+                        <span class="event-date">12 November 2023</span>
+                        <h3>Meet & Greet Special</h3>
+                        <p>Acara spesial bertemu dengan anggota pilihan di Mall Taman Anggrek. Terbuka untuk umum dengan tiket terbatas.</p>
+                    </div>
+                </div>
+                
+                <div class="event-item">
+                    <div class="event-content">
+                        <span class="event-date">25 Desember 2023</span>
+                        <h3>Christmas Special Theater Show</h3>
+                        <p>Pertunjukan spesial Natal di JKT48 Theater dengan konsep dan kostum bertema Natal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Tentang JKT48</h3>
+                    <p>JKT48 adalah grup idola Indonesia yang dibentuk pada tahun 2011. Grup ini mengusung konsep "Idol You Can Meet" yang memungkinkan penggemar untuk bertemu dengan anggota secara rutin.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Link Cepat</h3>
+                    <a href="#home">Beranda</a>
+                    <a href="#about">Tentang JKT48</a>
+                    <a href="#members">Anggota</a>
+                    <a href="#events">Acara</a>
+                    <a href="#">Theater</a>
+                    <a href="#">Merchandise</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> JKT48 Theater, fX Sudirman, Jakarta</p>
+                    <p><i class="fas fa-phone"></i> (021) 1234-5678</p>
+                    <p><i class="fas fa-envelope"></i> info@jkt48.com</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 JKT48 Official. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    // Penyesuaian offset scroll untuk sticky header
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80, 
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu after clicking a link
+                    document.querySelector('nav').classList.remove('active');
+                }
+            });
+        });
+
+        // Add animation to member cards and event items on scroll (Menggunakan IntersectionObserver)
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        // --- Observer untuk Member Cards (Slide Up) ---
+        const memberObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target); // Berhenti mengamati setelah animasi
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.member-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            memberObserver.observe(card);
+        });
+
+        // --- Observer untuk Event Timeline (Slide In Kiri/Kanan) ---
+        const eventObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateX(0)';
+                    observer.unobserve(entry.target); // Berhenti mengamati setelah animasi
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.event-item').forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            
+            // Logika baru untuk animasi slide in dari sisi yang sesuai
+            if (index % 2 === 0) {
+                // Item ganjil (posisi kiri saat tampilan normal)
+                item.style.transform = 'translateX(-50px)';
+            } else {
+                // Item genap (posisi kanan saat tampilan normal)
+                item.style.transform = 'translateX(50px)';
+            }
+            
+            eventObserver.observe(item);
+        });
+    </script>
+</body>
+</html>
